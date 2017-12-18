@@ -13,7 +13,10 @@ namespace AdventOfCode2017
             //dayOneFirstChallenge();
             //dayOneSecondChallenge();
             //dayTwoFirstChallenge();
-            dayTwoSecondChallenge();
+            //dayTwoSecondChallenge();
+            //dayThreeFirstChallenge();
+            //dayFourFirstChallenge();
+            dayFourSecondChallenge();
             Console.ReadKey();
         }
 
@@ -198,6 +201,177 @@ namespace AdventOfCode2017
                 Console.WriteLine(outputNumber);
             }
             Console.WriteLine(outputNumber);
+        }
+
+        private static void dayThreeFirstChallenge()
+        {
+            //int input = 338078;
+            int input = 16;
+
+            double widthOfSpiral = Math.Ceiling(Math.Sqrt(input));
+            Console.WriteLine(widthOfSpiral);
+
+            int x = 0;
+            int y = 0;
+            int value = 1;
+            int offsetStep = 1;
+            int incrementCounter = 0;
+            bool horizontal = true;
+            bool positive = true;
+
+            while (value != input)
+            {
+                Console.WriteLine(incrementCounter);
+                if (horizontal && positive)
+                {
+                    Console.WriteLine(incrementCounter);
+                    x++;
+                    value++;
+                    incrementCounter++;
+                    if (incrementCounter == offsetStep)
+                    {
+                        horizontal = !horizontal;
+                        incrementCounter = 0;
+                        Console.WriteLine(offsetStep);
+                    }
+                }
+                else if(horizontal && !positive)
+                {
+                    x--;
+                    value++;
+                    incrementCounter++;
+                    if (incrementCounter == offsetStep)
+                    {
+                        horizontal = !horizontal;
+                        positive = !positive;
+                        incrementCounter = 0;
+                        offsetStep++;
+                    }
+                }
+                else if(!horizontal && positive)
+                {
+                    y++;
+                    value++;
+                    incrementCounter++;
+                    if (incrementCounter == offsetStep)
+                    {
+                        horizontal = !horizontal;
+                        incrementCounter = 0;
+                    }
+                }
+                else if(!horizontal && !positive)
+                {
+                    y--;
+                    value++;
+                    incrementCounter++;
+                    if (incrementCounter == offsetStep)
+                    {
+                        horizontal = !horizontal;
+                        positive = !positive;
+                        incrementCounter = 0;
+                        offsetStep++;
+                    }
+                }
+
+            }
+
+            Console.WriteLine("X: {0} Y:{1}", x, y);
+
+        }
+
+        private static void dayFourFirstChallenge()
+        {
+            string input = InputGlobals.dayFourOneInput;
+            List<string> inputLines = new List<string>();
+            List<string> inputHolder = input.Split(Environment.NewLine.ToCharArray()).ToList<string>();
+            List<string> outputHolder = new List<string>();
+
+            foreach (string e in inputHolder)
+            {
+                if (e.Length != 0)
+                {
+                    inputLines.Add(e);
+                }
+            }
+
+            Console.WriteLine(inputLines.Count);
+
+            foreach (string e in inputLines)
+            {
+                List<string> tokensInLine = e.Split(" ".ToCharArray()).ToList<string>();
+                //Console.WriteLine(tokensInLine.Count);
+                bool valid = true;
+
+                tokensInLine.Sort();
+                for (int i = 1; i < tokensInLine.Count; i++)
+                {
+                    if (tokensInLine[i] == tokensInLine[i-1])
+                    {
+                        //Console.WriteLine("{0} Should be invalid", e);
+                        valid = false;
+                    }
+                }
+
+                if (valid)
+                {
+                    outputHolder.Add(e);
+                }
+            }
+
+            Console.WriteLine(outputHolder.Count);
+        }
+
+        private static void dayFourSecondChallenge()
+        {
+            string input = InputGlobals.dayFourOneInput;
+            List<string> inputLines = new List<string>();
+            List<string> inputHolder = input.Split(Environment.NewLine.ToCharArray()).ToList<string>();
+            List<string> outputHolder = new List<string>();
+
+            foreach (string e in inputHolder)
+            {
+                if (e.Length != 0)
+                {
+                    inputLines.Add(e);
+                }
+            }
+
+            Console.WriteLine(inputLines.Count);
+
+            foreach (string e in inputLines)
+            {
+                List<string> tokensInLine = e.Split(" ".ToCharArray()).ToList<string>();
+                bool valid = true;
+
+                for (int f = 0; f < tokensInLine.Count; f++)
+                {
+                    List<char> ad = tokensInLine[f].ToList<char>();
+                    ad.Sort();
+                    string haha = "";
+                    for (int g = 0; g < ad.Count; g++)
+                    {
+                        haha += ad[g];
+                    }
+                    tokensInLine[f] = haha;
+                }
+
+                tokensInLine.Sort();
+
+                for (int i = 1; i < tokensInLine.Count; i++)
+                {
+                    if (tokensInLine[i] == tokensInLine[i - 1])
+                    {
+                        valid = false;
+                    }
+                }
+
+                if (valid)
+                {
+                    outputHolder.Add(e);
+                }
+            }
+
+            Console.WriteLine(outputHolder.Count);
         }
 
         private static void checksumGenerator(List<string> inputList, List<int> outputDifferences)
