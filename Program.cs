@@ -16,7 +16,9 @@ namespace AdventOfCode2017
             //dayTwoSecondChallenge();
             //dayThreeFirstChallenge();
             //dayFourFirstChallenge();
-            dayFourSecondChallenge();
+            //dayFourSecondChallenge();
+            //dayFiveFirstChallenge();
+            dayFiveSecondChallenge();
             Console.ReadKey();
         }
 
@@ -372,6 +374,73 @@ namespace AdventOfCode2017
             }
 
             Console.WriteLine(outputHolder.Count);
+        }
+
+        private static void dayFiveFirstChallenge()
+        {
+            int numberOfSteps = 0;
+            int positionPointer = 0;
+
+            string inputHolder = InputGlobals.dayFiveInput;
+            string[] inputStringHolder = inputHolder.Split(" ".ToCharArray());
+            Console.WriteLine(inputStringHolder.Length);
+
+            int[] instructions = new int[inputStringHolder.Length];
+
+            for (int i = 0; i < inputStringHolder.Length; i++)
+            {
+                int.TryParse(inputStringHolder[i], out instructions[i]);
+                //Console.WriteLine(instructions[i]);
+            }
+
+            while (positionPointer < instructions.Length)
+            {
+                int positionModifyHolder = 0;
+                positionModifyHolder = instructions[positionPointer];
+                instructions[positionPointer]++;
+                positionPointer += positionModifyHolder;
+                numberOfSteps++;
+            }
+
+            Console.WriteLine(numberOfSteps);
+
+        }
+
+        private static void dayFiveSecondChallenge()
+        {
+            int numberOfSteps = 0;
+            int positionPointer = 0;
+
+            string inputHolder = InputGlobals.dayFiveInput;
+            string[] inputStringHolder = inputHolder.Split(" ".ToCharArray());
+            Console.WriteLine(inputStringHolder.Length);
+
+            int[] instructions = new int[inputStringHolder.Length];
+
+            for (int i = 0; i < inputStringHolder.Length; i++)
+            {
+                int.TryParse(inputStringHolder[i], out instructions[i]);
+                //Console.WriteLine(instructions[i]);
+            }
+
+            while (positionPointer < instructions.Length)
+            {
+                int positionModifyHolder = 0;
+                positionModifyHolder = instructions[positionPointer];
+                if (positionModifyHolder >= 3)
+                {
+                    instructions[positionPointer]--;
+                }
+                else
+                {
+                    instructions[positionPointer]++;
+                }
+                positionPointer += positionModifyHolder;
+                numberOfSteps++;
+            }
+
+            Console.WriteLine(numberOfSteps);
+
         }
 
         private static void checksumGenerator(List<string> inputList, List<int> outputDifferences)
